@@ -21,18 +21,14 @@ let addTask = () => {
   }
 };
 
-// 
+
 let toggleIsCompleted = (id) => {
   const task = todos.find((el) => el.id === id);
   task.isCompleted = !task.isCompleted;
-  
 };
 
-// let check = (text) => {
-//   const arr = todos.find(el => el.text === text);
-//   localStorage.getItem(arr.text, 1);
-//   console.log(arr)
-// }
+
+
 
 
 // создания элемента списка
@@ -43,13 +39,18 @@ let createTaskNode = (obj) => {
   <p class="task">${obj.text}</p>
   <button class="cross">❌</button> `;
   let checkbox = li.querySelector(".checkbox");
-  // const btnCross = li.querySelector(".cross");
-  // btnCross.addEventListener("click", function(){});
   checkbox.checked = obj.isCompleted;
   checkbox.addEventListener("change", () => {
     toggleIsCompleted(obj.id)
-    // check(obj.text)
+    window.localStorage.setItem(obj.text, +(checkbox.checked))
   });
+
+  let cross = li.querySelector(".cross");
+  cross.addEventListener('click', function () {
+    li.remove();
+    localStorage.removeItem(obj.text);
+  })
+
   return li;
 };
 
@@ -71,17 +72,16 @@ let start = () => {
       todos.unshift({
         text: key,
         id: Date.now(),
-        isCompleted: false,
-      })
+        isCompleted: Boolean(+localStorage.getItem(key)),
+      });
     };
     hidden.style.display = "block";
     renderTasks();
-  }
+  } 
 };
 start()
 
-
-
+console.log(Boolean(+localStorage.getItem(key)));
 
 // реакция на нажатие кнопки "добавить"
 add.addEventListener("click", function (event) {
@@ -110,10 +110,20 @@ const deleteCmpl = document.querySelector(".delete-cmpl");
 
 // реакция на нажатие кнопки "удалить завершенные"
 deleteCmpl.addEventListener('click', function () {
-  
   ul.innerHTML = "";
+  let complete = todos.filter((el) => el.isCompleted === true);
+  complete.forEach((el) => {
+    if (localStorage.getItem(el.text) === "1") {
+      localStorage.removeItem(el.text);
+    }
+    console.log(localStorage.getItem(el.text));
+  });
+
+
   let newarr = todos.filter(el => el.isCompleted === false)
-  newarr.forEach((el) => ul.append(createTaskNode(el)));
+  newarr.forEach((el) => {
+    ul.append(createTaskNode(el));
+  });
   todos = newarr;
 })
 
