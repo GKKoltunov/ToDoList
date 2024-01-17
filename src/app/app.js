@@ -81,7 +81,7 @@ let start = () => {
 };
 start()
 
-console.log(Boolean(+localStorage.getItem(key)));
+
 
 // реакция на нажатие кнопки "добавить"
 add.addEventListener("click", function (event) {
@@ -116,9 +116,7 @@ deleteCmpl.addEventListener('click', function () {
     if (localStorage.getItem(el.text) === "1") {
       localStorage.removeItem(el.text);
     }
-    console.log(localStorage.getItem(el.text));
   });
-
 
   let newarr = todos.filter(el => el.isCompleted === false)
   newarr.forEach((el) => {
