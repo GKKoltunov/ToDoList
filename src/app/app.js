@@ -4,6 +4,8 @@ const input = document.querySelector(".input");
 const list = document.querySelector(".list");
 const ul = document.querySelector(".ul");
 const add = document.querySelector(".add");
+const hidden = document.querySelector('.hidden')
+
 
 let addTask = () => {
   if (input.value.trim().length) {
@@ -21,6 +23,10 @@ let toggleIsCompleted = (id) => {
   console.log(todos);
 };
 
+
+
+
+
 let createTaskNode = (obj) => {
   let li = document.createElement("li");
   li.className = "elem";
@@ -28,6 +34,8 @@ let createTaskNode = (obj) => {
   <p class="task">${obj.text}</p>
   <button class="cross">❌</button> `;
   let checkbox = li.querySelector(".checkbox");
+  // const btnCross = li.querySelector(".cross");
+  // btnCross.addEventListener("click", function(){});
   checkbox.checked = obj.isCompleted;
   checkbox.addEventListener("change", () => toggleIsCompleted(obj.id));
   return li;
@@ -40,20 +48,21 @@ let renderTasks = () => {
 };
 
 
-add.addEventListener("click", function () {
-  
+add.addEventListener("click", function (event) {
+     event.preventDefault();  // отменить дефолтное поведение
+  hidden.style.display="block"
   addTask();
   renderTasks();
   console.log(todos);
 });
 
 
-
 const deleteAll = document.querySelector(".delete-all");
 
 deleteAll.addEventListener('click', function () {
   ul.innerHTML = "";
-  todos =[]
+  todos = []
+  hidden.style.display = "none";
 })
 
 
@@ -62,17 +71,12 @@ const deleteCmpl = document.querySelector(".delete-cmpl");
 deleteCmpl.addEventListener('click', function () {
   
   ul.innerHTML = "";
-  todos.forEach(el => {
-   
-    if (el.isCompleted === false) {
-      ul.append(createTaskNode(el));
-    } else {
-       let index = todos.indexOf(el);
-       
-      todos.splice(index, 1);
-    }
-  })
-console.log(todos)
-
+  let newarr = todos.filter(el => el.isCompleted === false)
+  newarr.forEach((el) => ul.append(createTaskNode(el)));
+  todos = newarr;
 })
 
+
+
+ 
+  

@@ -22,7 +22,7 @@ margin-top: 80px;
 .container{
   margin: 0 auto;
   margin-top: 33px;
-  width: 594px;
+  max-width: 594px;
   border-radius: 16px;
 background: #FFF;
 box-shadow: 0px 8px 35px 0px rgba(0, 0, 0, 0.16);
@@ -68,13 +68,14 @@ flex-shrink: 0;
 border: none;
 border-radius: 4px;
 background: #272829;
-color: var(---Gray-White, #FFF);
+color:  #FFF;
 text-align: center;
 font-family: Inter;
 font-size: 16px;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
+cursor: pointer;
 }
 
 .delete{
@@ -99,6 +100,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
+cursor: pointer;
 }
 
 .delete-all{
@@ -116,6 +118,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
+cursor: pointer;
 }
 
 .list{
@@ -140,6 +143,10 @@ height: 21px;
 cursor: pointer;
 }
 
+.checkbox:checked + .task{
+  text-decoration: line-through;
+}
+
 .task{
   color:  #54595E;
 font-family: Inter;
@@ -147,6 +154,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: 21px; 
+overflow: auto;
 }
 
 .cross{
@@ -155,4 +163,38 @@ line-height: 21px;
   width: 21px;
   height: 21px;
   cursor: pointer;
+}
+
+.hidden{
+  display: none;
+}
+
+@media(max-width:600px){
+  form{
+    width: 100%;
+    gap:24px
+  }
+.input{
+  width: 60%;
+}
+
+.add{
+  width: 35%;
+}
+
+.elem{
+  display: grid;
+  grid-template-columns: 16px 1fr 21px;
+  width: 100%
+}
+
+.delete-cmpl{
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+.delete-all{
+  padding: 5px 8px;
+  font-size: 13px;
+}
 }
