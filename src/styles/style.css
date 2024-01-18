@@ -88,7 +88,6 @@ padding: 18px 24px;
 
 .delete-cmpl{
   border: none;
-  display: flex;
 padding: 10px 16px;
 align-items: center; 
   border-radius: 4px;
@@ -104,7 +103,6 @@ cursor: pointer;
 }
 
 .delete-all{
-  display: flex;
 padding: 10px 16px;
 align-items: center;
 border-radius: 4px;
@@ -185,32 +183,40 @@ overflow: auto;
   display: none;
 }
 
-@media(max-width:600px){
+@media(max-width:620px){
+  .container{
+    margin: 33px 10px 0px;
+  }
   form{
     width: 100%;
-    gap:24px
+    gap:10px;
+    flex-direction: column;
   }
 .input{
-  width: 60%;
+  width: 100%;
 }
 
 .add{
-  width: 35%;
+  width: 100%;
 }
 
 .elem{
   display: grid;
-  grid-template-columns: 16px 1fr 21px;
+  grid-template-columns: 16px 1fr  21px 21px;
   width: 100%
 }
 
+.delete{
+  flex-direction: column;
+  gap: 10px;
+}
+
 .delete-cmpl{
-  padding: 5px 8px;
-  font-size: 13px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .delete-all{
-  padding: 5px 8px;
-  font-size: 13px;
+  font-size: 16px;
 }
 }
