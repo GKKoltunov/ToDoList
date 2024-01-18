@@ -36,7 +36,14 @@ let toggleIsCompleted = (id) => {
 };
 
 
-
+// let changeTask = () => {
+//    let li = document.createElement("li");
+//    li.className = "elem";
+//    li.innerHTML = `<input class="checkbox" type="checkbox" name="" id=""></input>
+//   <input class="change-text" type="text" placeholder="${obj.text}">
+//    <button class="save">✅</button>
+//   <button class="cross">❌</button> `;
+// }
 
 
 // создания элемента списка
@@ -45,13 +52,18 @@ function createTaskNode (obj) {
   li.className = "elem";
   li.innerHTML = `<input class="checkbox" type="checkbox" name="" id=""></input>
   <p class="task">${obj.text}</p>
+   <button class="change">✏️</button>
   <button class="cross">❌</button> `;
   let checkbox = li.querySelector(".checkbox");  //реакция нажатия на чекбокс
   checkbox.checked = obj.isCompleted;
   checkbox.addEventListener("change", () => {
     toggleIsCompleted(obj.id)
-  });
-
+  })
+  
+  let change = li.querySelector(".change");  //реакция на карандаш
+  change.addEventListener('click', () => {
+    changeTask(li,obj);
+  })
   let cross = li.querySelector(".cross");  //реакция нажатия на крестик
   cross.addEventListener('click', function () {
     li.remove();
@@ -65,6 +77,19 @@ function createTaskNode (obj) {
   return li;
 };
 
+function changeTask(li,obj) {
+  li.innerHTML = `<input class="checkbox" type="checkbox" name="" id=""></input>
+   <input class="change-text" type="text" value="${obj.text}">
+    <button class="save">✅</button>
+   <button class="cross">❌</button> `;
+  let changetext = li.querySelector(".change-text");
+  let savebtn = li.querySelector(".save"); // реакция на кнопку сохранить
+  savebtn.addEventListener("click", function () { 
+  obj.text = changetext.value
+    li.replaceWith(createTaskNode(obj))
+     filllocalStorage();
+  })
+}
 
 // заполнение списка элементами
 function renderTasks() {

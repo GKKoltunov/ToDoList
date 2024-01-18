@@ -132,7 +132,7 @@ gap: 24px;
 }
 .elem{
   display: grid;
-  grid-template-columns: 16px 470px 21px;
+  grid-template-columns: 16px 449px 21px 21px;
   gap: 16px;
   justify-content: space-between;
 }
@@ -159,6 +159,22 @@ overflow: auto;
 
 .cross{
   background: #FFF; 
+  border: none;
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.change{
+    background: #FFF; 
+  border: none;
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.save{
+     background: #FFF; 
   border: none;
   width: 21px;
   height: 21px;
